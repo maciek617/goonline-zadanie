@@ -50,7 +50,7 @@ function App() {
         setFilteredColors={setFilteredColors}
       />
       <div className='rectangles-wrapper'>
-        {filteredColors.map((color, index) => {
+        {(filteredColors || predefinedColors).map((color, index) => {
           return (
             // Class component
             <SingleColor
