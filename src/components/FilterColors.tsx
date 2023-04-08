@@ -1,20 +1,25 @@
 import { useState, useEffect } from 'react';
 import { extractRgbValues } from '../helpers/extractRgbValues';
 import { extractSaturation } from '../helpers/extractSaturation';
-import { FilterColorsProps } from '../interfaces';
+import { FilterColorsProps, allColorObj } from '../interfaces';
 
 const FilterColors: React.FC<FilterColorsProps> = ({
   setFilteredColors,
   sortedColors,
+  setSortedColors,
+  allColors,
+  filteredColors,
 }) => {
   const [red, setRed] = useState(false);
   const [blue, setBlue] = useState(false);
   const [green, setGreen] = useState(false);
   const [saturation, setSaturation] = useState(false);
 
+  console.log(sortedColors);
+
   useEffect(() => {
     setFilteredColors(
-      sortedColors.filter((el) => {
+      allColors.filter((el) => {
         const [r, g, b] = extractRgbValues(el.rgb);
         const [saturationValue] = extractSaturation(el.hsl);
 
@@ -27,7 +32,27 @@ const FilterColors: React.FC<FilterColorsProps> = ({
         );
       })
     );
-  }, [red, green, blue, saturation, sortedColors, setFilteredColors]);
+  }, [red, green, blue, saturation, allColors, setFilteredColors]);
+
+  useEffect(() => {
+    const sortArrayOfColors = (arr: allColorObj[]) => {
+      const newColors = [...arr].sort((a, b) => {
+        const [aR, aG, aB] = extractRgbValues(a.rgb);
+        const [bR, bG, bB] = extractRgbValues(b.rgb);
+
+        if (aR !== bR) {
+          return bR - aR; // Higher red value first
+        }
+        if (aG !== bG && aR !== bR) {
+          return bG - aG; // Higher green value next
+        }
+        return bB - aB; // Finally, higher blue value
+      });
+
+      setSortedColors(newColors);
+    };
+    sortArrayOfColors(filteredColors);
+  }, [setSortedColors, filteredColors]);
 
   const arrayToMapOverConditions = [
     {

@@ -21,6 +21,9 @@ export interface AddColorFormProps {
 export interface FilterColorsProps {
   setFilteredColors: (el: allColorObj[]) => void;
   sortedColors: allColorObj[];
+  setSortedColors: React.Dispatch<React.SetStateAction<allColorObj[]>>;
+  allColors: allColorObj[];
+  filteredColors: allColorObj[];
 }
 
 export interface ButtonProps {
