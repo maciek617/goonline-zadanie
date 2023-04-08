@@ -15,8 +15,6 @@ const FilterColors: React.FC<FilterColorsProps> = ({
   const [green, setGreen] = useState(false);
   const [saturation, setSaturation] = useState(false);
 
-  console.log(sortedColors);
-
   useEffect(() => {
     setFilteredColors(
       allColors.filter((el) => {

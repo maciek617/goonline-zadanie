@@ -11,8 +11,6 @@ function App() {
   const [sortedColors, setSortedColors] = useState<allColorObj[]>([]);
   const [filteredColors, setFilteredColors] = useState<allColorObj[]>([]);
 
-  console.log(filteredColors);
-
   useEffect(() => {
     const storedColors = localStorage.getItem('colors');
     if (storedColors) {
