@@ -44,7 +44,7 @@ const FilterColors: React.FC<FilterColorsProps> = ({
         if (aG !== bG && aR !== bR) {
           return bG - aG; // Higher green value next
         }
-        return bB - aB; // Finally, higher blue value
+        return bB - aB; // Higher blue value
       });
 
       setSortedColors(newColors);

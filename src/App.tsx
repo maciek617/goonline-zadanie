@@ -33,7 +33,7 @@ function App() {
         filteredColors={filteredColors}
       />
       <div className='rectangles-wrapper'>
-        {sortedColors.map((color, index) => {
+        {(sortedColors || predefinedColors).map((color, index) => {
           return (
             // Class component
             <SingleColor
